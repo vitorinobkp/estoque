@@ -15,66 +15,74 @@ import dao.ConexaoDB;
  *
  * @author User
  */
-public class TableModelPessoa extends AbstractTableModel{
-    
-    private ArrayList<Pessoa> listaDePessoas;
-    private String[] colunas = {"ID", "Produto", "Preço", "Quantidade"};
-    
-    public TableModelPessoa(){
-        this.listaDePessoas = new ArrayList<>();
-        ConexaoDB conexao = new ConexaoDB();
-        try {
+public class TableModelPessoa extends AbstractTableModel {
+
+	private ArrayList<Pessoa> listaDePessoas;
+	private String[] colunas = { "ID", "Nome", "Descrição", "Quantidade", "Preço" };
+
+	public TableModelPessoa() {
+		this.listaDePessoas = new ArrayList<>();
+		ConexaoDB conexao = new ConexaoDB();
+		try {
 			ArrayList<Pessoa> listaPessoa = conexao.buscarTodos("SELECT * FROM PESSOA");
-			for(Pessoa p : listaPessoa){
+			for (Pessoa p : listaPessoa) {
 				this.listaDePessoas.add(p);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-    }
-    public void addPessoa(Pessoa pPessoa){
-        this.listaDePessoas.add(pPessoa);
-        fireTableDataChanged();
-    }
-    
-    public void removerPessoa (int rowIndex) {
-        this.listaDePessoas.remove(rowIndex);
-        fireTableDataChanged();
-    }
-    
-    public void refresh(){
-    	fireTableDataChanged();
-    }
-    public Pessoa getPessoa(int rowIndex) {
-        return this.listaDePessoas.get(rowIndex); 
-    }
-    
-    @Override
-    public int getRowCount() {
-        return this.listaDePessoas.size();
-    }
 
-    @Override
-    public int getColumnCount() {
-        return colunas.length;
-    }
+	}
+	
+	public void addPessoa(Pessoa pPessoa) {
+		this.listaDePessoas.add(pPessoa);
+		fireTableDataChanged();
+	}
 
-    @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-       switch(columnIndex) {
-           case 0:
-               return this.listaDePessoas.get(rowIndex).getNome();
-           case 1:
-               return this.listaDePessoas.get(rowIndex).getIdade();
-           default:
-               return this.listaDePessoas.get(rowIndex);
-       } 
-    }
-    
-    @Override
-    public String getColumnName(int columnIndex){
-        return this.colunas[columnIndex];
-    }
+	public void removerPessoa(int rowIndex) {
+		this.listaDePessoas.remove(rowIndex);
+		fireTableDataChanged();
+	}
+
+	public void refresh() {
+		fireTableDataChanged();
+	}
+
+	public Pessoa getPessoa(int rowIndex) {
+		return this.listaDePessoas.get(rowIndex);
+	}
+
+	@Override
+	public int getRowCount() {
+		return this.listaDePessoas.size();
+	}
+
+	@Override
+	public int getColumnCount() {
+		return colunas.length;
+	}
+
+	@Override
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		switch (columnIndex) {
+		case 0:
+			return this.listaDePessoas.get(rowIndex).getId();
+		case 1:
+			return this.listaDePessoas.get(rowIndex).getNome();
+		case 2:
+			return this.listaDePessoas.get(rowIndex).getDescricao();
+		case 3:
+			return this.listaDePessoas.get(rowIndex).getQuantidade();
+		case 4:
+			return this.listaDePessoas.get(rowIndex).getPreco();
+		default:
+			return this.listaDePessoas.get(rowIndex);
+		}
+	}
+
+	@Override
+	public String getColumnName(int columnIndex) {
+		return this.colunas[columnIndex];
+	}
 }

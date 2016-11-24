@@ -34,12 +34,19 @@ public class ConexaoDB {
 		Statement statement = (Statement) instance.createStatement();
 		ResultSet rs = statement.executeQuery(sql);
 		ArrayList<Pessoa> lstPessoa = new ArrayList<Pessoa>();
+		
+		int id;
 		String nome;
-		int idade;
+		String descricao;
+		int quantidade;
+		double preco;
 		while (rs.next()) {
-			nome = rs.getString(1);
-			idade = rs.getInt(2);
-			Pessoa p = new Pessoa(nome, idade);
+			id = rs.getInt(1);
+			nome = rs.getString(2);
+			descricao = rs.getString(3);
+			quantidade = rs.getInt(4);
+			preco = rs.getDouble(5);
+			Pessoa p = new Pessoa(id, nome, descricao, quantidade, preco);
 			lstPessoa.add(p);
 		}
 		return lstPessoa;

@@ -13,12 +13,15 @@ import dao.ConexaoDB;
 import model.Pessoa;
 import model.TableModelPessoa;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -26,12 +29,13 @@ import java.awt.event.ActionEvent;
  */
 public class ViewTabelaPessoas extends javax.swing.JFrame {
     private TableModelPessoa tableModelPessoa;
+    
     /**
      * Creates new form ViewTabelaPessoas
      */
     public ViewTabelaPessoas() {
+//    	setOpacity(0.0f);
     	setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\User\\Downloads\\Guj-logo-1.png"));
-    	setResizable(false);
     	setTitle("Estoque");
         initComponents();
         this.tableModelPessoa = new TableModelPessoa();
@@ -49,13 +53,13 @@ public class ViewTabelaPessoas extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jbTablePessoa = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblNome = new javax.swing.JLabel();
+        lblDescricao = new javax.swing.JLabel();
         txtNomePessoa = new javax.swing.JTextField();
-        txtIdadePessoa = new javax.swing.JTextField();
+        txtDescricao = new javax.swing.JTextField();
         btnAdicionarPessoa = new javax.swing.JButton();
         btnRemoverPessoa = new javax.swing.JButton();
-
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jbTablePessoa.setModel(new javax.swing.table.DefaultTableModel(
@@ -71,9 +75,9 @@ public class ViewTabelaPessoas extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jbTablePessoa);
 
-        jLabel1.setText("Nome:");
+        lblNome.setText("Nome:");
 
-        jLabel2.setText("Idade:");
+        lblDescricao.setText("Descri\u00E7\u00E3o:");
 
         txtNomePessoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,46 +98,74 @@ public class ViewTabelaPessoas extends javax.swing.JFrame {
                 btnRemoverPessoaActionPerformed(evt);
             }
         });
+        
+        lblQuantidade = new JLabel("Quantidade:");
+        
+        txtQuantidade = new JTextField();
+        txtQuantidade.setColumns(10);
+        
+        JLabel lblPreco = new JLabel("Preco:");
+        
+        txtPreco = new JTextField();
+        txtPreco.setColumns(10);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
         	layout.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(layout.createSequentialGroup()
-        			.addContainerGap(15, Short.MAX_VALUE)
+        		.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+        			.addGap(15)
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 375, GroupLayout.PREFERRED_SIZE)
         				.addGroup(layout.createSequentialGroup()
-        					.addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
-        						.addComponent(jLabel2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-        						.addComponent(jLabel1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(layout.createSequentialGroup()
-        							.addComponent(txtIdadePessoa, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(btnAdicionarPessoa)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(btnRemoverPessoa, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
-        						.addComponent(txtNomePessoa, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE))))
-        			.addGap(19))
+        					.addComponent(lblPreco)
+        					.addContainerGap())
+        				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        					.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+        						.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        							.addComponent(lblNome, GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+        							.addComponent(lblDescricao, GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE))
+        						.addPreferredGap(ComponentPlacement.RELATED)
+        						.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        							.addGroup(layout.createSequentialGroup()
+        								.addComponent(btnAdicionarPessoa)
+        								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        								.addComponent(btnRemoverPessoa, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
+        							.addComponent(txtNomePessoa, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE)
+        							.addGroup(layout.createSequentialGroup()
+        								.addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
+        									.addComponent(txtPreco, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+        									.addComponent(txtDescricao, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+        								.addGap(18)
+        								.addComponent(lblQuantidade)
+        								.addPreferredGap(ComponentPlacement.RELATED)
+        								.addComponent(txtQuantidade)))
+        						.addGap(98))
+        					.addGroup(layout.createSequentialGroup()
+        						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 375, GroupLayout.PREFERRED_SIZE)
+        						.addContainerGap(19, Short.MAX_VALUE)))))
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(layout.createSequentialGroup()
+        		.addGroup(Alignment.LEADING, layout.createSequentialGroup()
         			.addContainerGap()
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel1)
+        				.addComponent(lblNome)
         				.addComponent(txtNomePessoa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addGap(24)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(txtDescricao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblDescricao)
+        				.addComponent(lblQuantidade)
+        				.addComponent(txtQuantidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        					.addComponent(jLabel2)
-        					.addComponent(txtIdadePessoa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        					.addComponent(btnAdicionarPessoa)
-        					.addComponent(btnRemoverPessoa)))
-        			.addPreferredGap(ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-        			.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblPreco)
+        				.addComponent(txtPreco, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(btnAdicionarPessoa)
+        				.addComponent(btnRemoverPessoa))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
         			.addContainerGap())
         );
         getContentPane().setLayout(layout);
@@ -143,18 +175,27 @@ public class ViewTabelaPessoas extends javax.swing.JFrame {
 
     private void btnAdicionarPessoaActionPerformed(java.awt.event.ActionEvent evt){                                                   
         String nome = this.txtNomePessoa.getText();
-        int idade = Integer.parseInt(this.txtIdadePessoa.getText());
+        String descricao = this.txtDescricao.getText();
+        int quantidade = Integer.parseInt(this.txtQuantidade.getText());
+        double preco = Double.parseDouble(this.txtPreco.getText());
         
-        Pessoa p = new Pessoa(nome, idade);
+        Pessoa p = new Pessoa(quantidade, nome, descricao, quantidade, preco);
         try{
         ConexaoDB conexao = new ConexaoDB();
-        conexao.executeConsulta("insert into pessoa(nome, idade) values ('_nome',_idade)".replace("_nome", nome).
-        		replaceAll("_idade", String.valueOf(idade))); 
+        conexao.executeConsulta("insert into pessoa(nome, descricao, quantidade, preco) values ('_nome','_descricao',_quantidade,preco)".
+        		replace("_nome", nome).
+        		replace("_descricao", descricao).
+        		replace("_quantidade", String.valueOf(quantidade)).
+        		replace("_preco", String.valueOf(preco))); 
         } catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Erro ao inserir. ");
 		}
+        this.tableModelPessoa = new TableModelPessoa();
+        this.jbTablePessoa.setModel(tableModelPessoa);
         
-        this.tableModelPessoa.addPessoa(p);
+        //this.tableModelPessoa.refresh();
+        
+        //this.tableModelPessoa.addPessoa(p);
     }                                                  
 
     private void btnRemoverPessoaActionPerformed(java.awt.event.ActionEvent evt) {                                                 
@@ -218,10 +259,13 @@ public class ViewTabelaPessoas extends javax.swing.JFrame {
     // Variables declaration - do not modify                     
     private javax.swing.JButton btnAdicionarPessoa;
     private javax.swing.JButton btnRemoverPessoa;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblDescricao;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jbTablePessoa;
-    private javax.swing.JTextField txtIdadePessoa;
+    private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtNomePessoa;
+    private JLabel lblQuantidade;
+    private JTextField txtQuantidade;
+    private JTextField txtPreco;
 }
